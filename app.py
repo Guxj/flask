@@ -13,5 +13,11 @@ def user(name):
     return render_template('user.html', name=name)
 
 
+@app.route('/test')
+def test():
+    user = {'username': "陈子康", 'studentID': 2013450103}
+    return render_template('test.html', user=user)
+
+
 if __name__ == '__main__':
     app.run()
