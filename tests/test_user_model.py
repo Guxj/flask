@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 # @Title: test_user_model.py
-# @Package myweb
+# @Package flask
 # @Description: TODO
 # @author 陈子康
 # @Date 2021/5/22 22:23

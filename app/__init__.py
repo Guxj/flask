@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 # @Title: __init__
-# @Package myweb
+# @Package flask
 # @Description: TODO
 # @author 陈子康
 # @Date 2021/5/23 14:35

@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 # @Title: models
-# @Package myweb
+# @Package flask
 # @Description: TODO
 # @author 陈子康
 # @Date 2021/5/23 14:34
