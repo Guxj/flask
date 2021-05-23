@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %}{{ super() }}用户信息{% endblock %}
+
+
+{% block page_content %}
+    Hello, {{ name }}!
+
+    {{ wtf.quick_form(form) }}
+
+{% endblock %}
