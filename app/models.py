@@ -4,6 +4,10 @@
 # @Description: TODO
 # @author 陈子康
 # @Date 2021/5/23 14:34
+from datetime import datetime
+
+from flask import current_app
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from . import db
@@ -32,7 +36,7 @@ class User(UserMixin, db.Model):
     realname = db.Column(db.String(64))
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
-
+    confirmed = db.Column(db.Boolean, default=False)
     @property
     def password(self):
         raise AttributeError('密码不可以直接读取')
@@ -44,6 +48,24 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    def generate_confirmation_token(self, expiration=3600):
+        s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        return s.dumps({'confirm': self.id}).decode('utf-8')
+
+    def confirm(self, token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except:
+            return False
+        if data.get('confirm') != self.id:
+            return False
+        self.confirmed = True
+        db.session.add(self)
+        return True
+    def ping(self):
+        self.last_seen = datetime.utcnow()
+        db.session.add(self)
 
 class Permission:
     FOLLOW = 0x01

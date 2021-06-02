@@ -2,6 +2,7 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
 
@@ -20,16 +21,20 @@ class Config:
     def init_app(app):
         pass
 
+
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'mysql://root:root@192.168.220.117:3306/test'
+
 
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'mysql://root:root@192.168.220.117:3306/test'
 
+
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'mysql://root:root@192.168.220.117:3306/test'
+
 
 config = {
     'development': DevelopmentConfig,
